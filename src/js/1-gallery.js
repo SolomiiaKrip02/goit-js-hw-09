@@ -1,45 +1,45 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const images = [
-  {
-    preview: 'https://placekitten.com/300/200',
-    original: 'https://placekitten.com/1200/800',
-    description: 'Cute kitten 1',
-  },
-  {
-    preview: 'https://placekitten.com/301/200',
-    original: 'https://placekitten.com/1201/800',
-    description: 'Cute kitten 2',
-  },
-  {
-    preview: 'https://placekitten.com/302/200',
-    original: 'https://placekitten.com/1202/800',
-    description: 'Cute kitten 3',
-  },
-];
+document.addEventListener('DOMContentLoaded', () => {
+  const images = [
+    {
+      small: 'https://picsum.photos/id/1015/250/150',
+      large: 'https://picsum.photos/id/1015/1000/600',
+      description: 'Image 1',
+    },
+    {
+      small: 'https://picsum.photos/id/1016/250/150',
+      large: 'https://picsum.photos/id/1016/1000/600',
+      description: 'Image 2',
+    },
+    {
+      small: 'https://picsum.photos/id/1018/250/150',
+      large: 'https://picsum.photos/id/1018/1000/600',
+      description: 'Image 3',
+    },
+  ];
 
-const galleryContainer = document.querySelector('.gallery');
+  const galleryEl = document.querySelector('.gallery');
+  if (!galleryEl) return;
 
-const galleryMarkup = images
-  .map(
-    ({ preview, original, description }) => `
-      <li class="gallery-item">
-        <a class="gallery-link" href="${original}">
-          <img 
-            class="gallery-image" 
-            src="${preview}" 
-            alt="${description}" 
-          />
-        </a>
-      </li>`
-  )
-  .join('');
+  const markup = images
+    .map(
+      img => `
+    <li class="gallery-item">
+      <a class="gallery-link" href="${img.large}">
+        <img class="gallery-image" src="${img.small}" alt="${img.description}" />
+      </a>
+    </li>
+  `
+    )
+    .join('');
 
-galleryContainer.innerHTML = galleryMarkup;
+  galleryEl.innerHTML = markup;
 
-new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-  captionPosition: 'bottom',
+  new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250,
+  });
 });
